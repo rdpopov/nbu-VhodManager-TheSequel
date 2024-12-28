@@ -1,6 +1,8 @@
 package org.example.entity;
 
 import javax.persistence.*;
+
+import java.time.Instant;
 import java.util.Date;
 
 @Entity
@@ -9,15 +11,16 @@ public class Inhabitants {
 
     @Id
     @Column(name = "InhID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int inhId;
 
-    @Column(name = "InhFirstname", length = 45)
+    @Column(name = "InhFirstname", nullable = false,length = 45)
     private String inhFirstname;
 
-    @Column(name = "InhLastname", length = 45)
+    @Column(name = "InhLastname",nullable = false, length = 45)
     private String inhLastname;
 
-    @Column(name = "InhDateOfBirth")
+    @Column(name = "InhDateOfBirth",nullable = false)
     @Temporal(TemporalType.DATE)
     private Date inhDateOfBirth;
 
@@ -25,6 +28,22 @@ public class Inhabitants {
     @JoinColumn(name = "AppartmentsApptID", nullable = false, referencedColumnName = "ApptID",
                 foreignKey = @ForeignKey(name = "fk_Inhabitants_Appartments1"))
     private Appartments appartment;
+
+    public Inhabitants () {
+        this.inhId=0;
+        this.inhFirstname="";
+        this.inhLastname="";
+        this.inhDateOfBirth = Date.from(Instant.MIN);
+        this.appartment=null;
+    }
+
+    public Inhabitants (String inhFirstname, String inhLastname, Date inhDateOfBirth, Appartments appartment) {
+        this.inhId=0;
+        this.inhFirstname=inhFirstname;
+        this.inhLastname=inhLastname;
+        this.inhDateOfBirth = inhDateOfBirth ;
+        this.appartment=appartment;
+    }
 
     // Getters and Setters
     public int getInhId() {

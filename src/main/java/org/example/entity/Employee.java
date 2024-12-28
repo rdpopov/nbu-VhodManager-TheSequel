@@ -10,6 +10,7 @@ public class Employee {
 
     @Id
     @Column(name = "EmpID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int empId;
 
     @Column(name = "EmpFirstname", length = 45)
@@ -25,9 +26,26 @@ public class Employee {
     private String empTel;
 
     @ManyToOne
-    @JoinColumn(name = "Company_CompanyID", nullable = false, referencedColumnName = "CompanyID",
-                foreignKey = @ForeignKey(name = "fk_Employee_Company"))
+    @JoinColumn(name = "CompanyCompanyID", nullable = false, referencedColumnName = "CompanyID",
+    foreignKey = @ForeignKey(name = "fk_Employee_Company"))
     private Company company;
+
+    public Employee () {
+        this.empId=0;
+        this.empFirstname="";
+        this.empLastname="";
+        this.empEgn="";
+        this.empTel="";
+        this.company=null;
+    }
+
+    public Employee (String empFirstname, String empLastname, String empEgn, String empTel, Company company){
+        this.empFirstname=empFirstname;
+        this.empLastname=empLastname;
+        this.empEgn=empEgn;
+        this.empTel=empTel;
+        this.company=company;
+    }
 
     // Getters and Setters
     public int getEmpId() {

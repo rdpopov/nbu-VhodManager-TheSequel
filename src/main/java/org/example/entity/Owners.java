@@ -8,23 +8,38 @@ public class Owners {
 
     @Id
     @Column(name = "OwnerID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int ownerId;
 
-    @Column(name = "OwnerFirstname", length = 45)
+    @Column(name = "OwnerFirstname", length = 45,nullable = false)
     private String ownerFirstname;
 
-    @Column(name = "OwnerLastname", length = 45)
+    @Column(name = "OwnerLastname", length = 45,nullable = false)
     private String ownerLastname;
 
-    @Column(name = "OwnerPhone", length = 15)
+    @Column(name = "OwnerPhone", length = 15,nullable = false)
     private String ownerPhone;
 
-    @Column(name = "OwnerEGN", length = 15)
+    @Column(name = "OwnerEGN", length = 15,nullable = false)
     private String ownerEgn;
 
     // Getters and Setters
     public int getOwnerId() {
         return ownerId;
+    }
+    public Owners(){
+        this.ownerId=0;
+        this.ownerFirstname="";
+        this.ownerLastname="";
+        this.ownerPhone="";
+        this.ownerEgn="";
+    }
+
+    public Owners(String ownerFirstname, String ownerLastname, String ownerPhone, String ownerEgn) {
+        this.ownerFirstname = ownerFirstname;
+        this.ownerLastname = ownerLastname;
+        this.ownerPhone = ownerPhone;
+        this.ownerEgn = ownerEgn;
     }
 
     public void setOwnerId(int ownerId) {

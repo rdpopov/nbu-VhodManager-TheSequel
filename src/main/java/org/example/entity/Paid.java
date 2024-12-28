@@ -9,6 +9,7 @@ public class Paid {
 
     @Id
     @Column(name = "PaidID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int paidId;
 
     @ManyToOne
@@ -20,6 +21,17 @@ public class Paid {
     @JoinColumn(name = "AppartmentsApptID", nullable = false, referencedColumnName = "ApptID",
                 foreignKey = @ForeignKey(name = "fk_Paid_Appartments1"))
     private Appartments appartment;
+
+    public Paid() {
+        this.paidId=0;
+        this.tax=null;
+        this.appartment=null;
+    }
+
+    public Paid(Tax tax, Appartments appartment) {
+        this.tax=tax;
+        this.appartment=appartment;
+    }
 
     // Getters and Setters
     public int getPaidId() {

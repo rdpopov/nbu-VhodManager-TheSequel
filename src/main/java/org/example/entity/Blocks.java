@@ -10,18 +10,19 @@ public class Blocks {
 
     @Id
     @Column(name = "BlockID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int blockId;
 
-    @Column(name = "BlockAdress", length = 45)
+    @Column(name = "BlockAdress",nullable = false, length = 45)
     private String blockAddress;
 
-    @Column(name = "BlockFloors")
+    @Column(name = "BlockFloors",nullable = false)
     private Integer blockFloors;
 
-    @Column(name = "BlockName", length = 45)
+    @Column(name = "BlockName",nullable = false , length = 45)
     private String blockName;
 
-    @Column(name = "BlockPart", length = 45)
+    @Column(name = "BlockPart",nullable = false, length = 45)
     private String blockPart;
 
     @ManyToOne
@@ -30,11 +31,27 @@ public class Blocks {
     private Tax tax;
 
     @ManyToOne
-    @JoinColumns({
-        @JoinColumn(name = "EmployeeEmpID", referencedColumnName = "EmpID", nullable = false),
-        @JoinColumn(name = "EmployeeCompanyCompanyID", referencedColumnName = "CompanyCompanyID", nullable = false)
-    })
+    @JoinColumn(name = "EmployeeEmpID", referencedColumnName = "EmpID", nullable = false, foreignKey = @ForeignKey(name = "fk_Blocks_Employee1_idx"))
     private Employee employee;
+
+    public Blocks() {
+        this.blockId= 0;
+        this.blockAddress= "";
+        this.blockFloors= 0;
+        this.blockName= "";
+        this.blockPart= "";
+        this.tax = null;
+        this.employee= null;
+    }
+
+    public Blocks(String blockAddress, Integer blockFloors, String blockName, String blockPart, Tax tax, Employee employee) {
+        this.blockAddress= blockAddress;
+        this.blockFloors= blockFloors;
+        this.blockName= blockName;
+        this.blockPart= blockPart;
+        this.tax = tax;
+        this.employee= employee;
+    }
 
     // Getters and Setters
     public int getBlockId() {

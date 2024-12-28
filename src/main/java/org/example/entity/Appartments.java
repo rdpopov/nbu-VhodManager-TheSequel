@@ -8,15 +8,16 @@ public class Appartments {
 
     @Id
     @Column(name = "ApptID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int apptId;
 
-    @Column(name = "ApptFloor")
+    @Column(name = "ApptFloor",nullable = false)
     private Integer apptFloor;
 
-    @Column(name = "ApptArea")
+    @Column(name = "ApptArea",nullable = false)
     private Double apptArea;
 
-    @Column(name = "ApptNumber", length = 10)
+    @Column(name = "ApptNumber",nullable = false, length = 10)
     private String apptNumber;
 
     @ManyToOne
@@ -28,6 +29,24 @@ public class Appartments {
     @JoinColumn(name = "ApptBlockID", nullable = false, referencedColumnName = "BlockID",
                 foreignKey = @ForeignKey(name = "fk_Appartments_Blocks1"))
     private Blocks block;
+
+    public Appartments() {
+        this.apptId = 0;
+        this.apptFloor = 0;
+        this.apptArea = 0.0;
+        this.apptNumber = "" ;
+        this.owner = null;
+        this.block = null;
+    }
+
+    public Appartments(Integer apptFloor , Double apptArea , String apptNumber, Owners owner , Blocks block)
+    {
+        this.apptFloor = apptFloor;
+        this.apptArea = apptArea;
+        this.apptNumber = apptNumber;
+        this.owner = owner;
+        this.block = block;
+    }
 
     // Getters and Setters
     public int getApptId() {

@@ -13,13 +13,14 @@ public class Main {
         SessionFactoryUtil.getSessionFactory().openSession();
 
 
-        // Company company = new Company("Nestle",
-        //         LocalDate.of(2005, 10, 10), 6000);
-
-       // // CompanyDao.saveCompany(company);
+        // Company company = new Company("Asdf","ghj");
+        // CompanyDao.save(company);
 
         // Company company1 = CompanyDao.getCompanyById(11);
         // System.out.println(company1);
+        for (Company all : CompanyDao.findAll()) {
+            System.out.println(all);
+        }
 
         // company1.setName("Nestle Edited");
         // CompanyDao.updateCompany(company1);
