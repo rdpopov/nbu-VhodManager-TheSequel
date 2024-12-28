@@ -22,7 +22,7 @@ public class Inhabitants {
     private Date inhDateOfBirth;
 
     @ManyToOne
-    @JoinColumn(name = "Appartments_ApptID", nullable = false, referencedColumnName = "ApptID",
+    @JoinColumn(name = "AppartmentsApptID", nullable = false, referencedColumnName = "ApptID",
                 foreignKey = @ForeignKey(name = "fk_Inhabitants_Appartments1"))
     private Appartments appartment;
 

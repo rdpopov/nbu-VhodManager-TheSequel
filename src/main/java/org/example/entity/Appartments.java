@@ -20,7 +20,7 @@ public class Appartments {
     private String apptNumber;
 
     @ManyToOne
-    @JoinColumn(name = "Owners_OwnerID", nullable = false, referencedColumnName = "OwnerID",
+    @JoinColumn(name = "OwnersOwnerID", nullable = false, referencedColumnName = "OwnerID",
                 foreignKey = @ForeignKey(name = "fk_Appartments_Owners1"))
     private Owners owner;
 

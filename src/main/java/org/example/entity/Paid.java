@@ -12,12 +12,12 @@ public class Paid {
     private int paidId;
 
     @ManyToOne
-    @JoinColumn(name = "Tax_TaxId", nullable = false, referencedColumnName = "TaxId",
+    @JoinColumn(name = "TaxTaxId", nullable = false, referencedColumnName = "TaxId",
                 foreignKey = @ForeignKey(name = "fk_Paid_Tax1"))
     private Tax tax;
 
     @ManyToOne
-    @JoinColumn(name = "Appartments_ApptID", nullable = false, referencedColumnName = "ApptID",
+    @JoinColumn(name = "AppartmentsApptID", nullable = false, referencedColumnName = "ApptID",
                 foreignKey = @ForeignKey(name = "fk_Paid_Appartments1"))
     private Appartments appartment;
 

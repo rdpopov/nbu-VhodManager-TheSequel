@@ -25,14 +25,14 @@ public class Blocks {
     private String blockPart;
 
     @ManyToOne
-    @JoinColumn(name = "Tax_TaxId", nullable = false, referencedColumnName = "TaxId",
+    @JoinColumn(name = "TaxTaxId", nullable = false, referencedColumnName = "TaxId",
                 foreignKey = @ForeignKey(name = "fk_Blocks_Tax1"))
     private Tax tax;
 
     @ManyToOne
     @JoinColumns({
-        @JoinColumn(name = "Employee_EmpID", referencedColumnName = "EmpID", nullable = false),
-        @JoinColumn(name = "Employee_Company_CompanyID", referencedColumnName = "Company_CompanyID", nullable = false)
+        @JoinColumn(name = "EmployeeEmpID", referencedColumnName = "EmpID", nullable = false),
+        @JoinColumn(name = "EmployeeCompanyCompanyID", referencedColumnName = "CompanyCompanyID", nullable = false)
     })
     private Employee employee;
 
