@@ -18,8 +18,13 @@ public class Main {
         //
 
         SessionFactoryUtil.getSessionFactory().openSession();
+        TaxDao.clear();
         Tax company = new Tax();
         TaxDao.save(company);
+
+        for (Tax all : TaxDao.findAll()) {
+            System.out.println(all);
+        }
 
         // Company company1 = CompanyDao.getCompanyById(11);
         // System.out.println(company1);

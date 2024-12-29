@@ -7,6 +7,9 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+
 public class EmployeeDao { 
 
     // Save a new Employee
@@ -36,7 +39,7 @@ public class EmployeeDao {
             return query.list();  // Return all Employees in the database
         }
     }
-
+    // todo: add a thing for load balanicing the Employees
     // Update an existing Employee
     public static void update(Employee employee) {
         Transaction transaction = null;
@@ -62,6 +65,22 @@ public class EmployeeDao {
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();  // Rollback in case of error
+            e.printStackTrace();
+        }
+    }
+
+    public static void clear() {
+        Transaction transaction = null;
+
+        try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaDelete<Employee> delete = cb.createCriteriaDelete(Employee.class);
+            delete.from(Employee.class);
+            transaction = session.beginTransaction();
+            session.createQuery(delete).executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
     }

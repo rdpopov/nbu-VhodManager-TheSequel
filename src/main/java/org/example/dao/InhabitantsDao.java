@@ -7,6 +7,9 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+
 
 public class InhabitantsDao {
 
@@ -63,6 +66,22 @@ public class InhabitantsDao {
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();  // Rollback in case of error
+            e.printStackTrace();
+        }
+    }
+
+    public static void clear() {
+        Transaction transaction = null;
+
+        try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaDelete<Inhabitants> delete = cb.createCriteriaDelete(Inhabitants.class);
+            delete.from(Inhabitants.class);
+            transaction = session.beginTransaction();
+            session.createQuery(delete).executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
             e.printStackTrace();
         }
     }
