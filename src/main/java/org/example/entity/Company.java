@@ -2,6 +2,8 @@ package org.example.entity;
 
 import javax.persistence.*;
 
+import org.example.utils.VladoRandoma;
+
 @Entity
 @Table(name = "Company", schema = "mydb", uniqueConstraints = {
     @UniqueConstraint(columnNames = "CompanyID")
@@ -45,9 +47,8 @@ public class Company {
     }
 
    public Company() {
-        this.companyId = 0; // "this" refers to the current instance
-        this.companyName = ""; // "this" refers to the current instance
-        this.companyAddress = ""; // "this" refers to the current instance
+        this.companyName = VladoRandoma.generateName(); // "this" refers to the current instance
+        this.companyAddress = VladoRandoma.generateAdress(); // "this" refers to the current instance
     }
 
    public Company(String name,String companyAddress) {

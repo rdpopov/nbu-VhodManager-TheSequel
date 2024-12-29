@@ -11,7 +11,7 @@ import java.util.List;
 public class OwnersDao {
 
     // Save a new Owner
-    public void save(Owners owner) {
+    public static void save(Owners owner) {
         Transaction transaction = null;
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -24,14 +24,14 @@ public class OwnersDao {
     }
 
     // Find an Owner by ID
-    public Owners findById(int ownerId) {
+    public static Owners findById(int ownerId) {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             return session.get(Owners.class, ownerId);  // Retrieve Owner object by ID
         }
     }
 
     // Find all Owners
-    public List<Owners> findAll() {
+    public static List<Owners> findAll() {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Query<Owners> query = session.createQuery("from Owners", Owners.class);
             return query.list();  // Return all Owners in the database
@@ -39,7 +39,7 @@ public class OwnersDao {
     }
 
     // Update an existing Owner
-    public void update(Owners owner) {
+    public static void update(Owners owner) {
         Transaction transaction = null;
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -52,7 +52,7 @@ public class OwnersDao {
     }
 
     // Delete an Owner by ID
-    public void delete(int ownerId) {
+    public static void delete(int ownerId) {
         Transaction transaction = null;
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();

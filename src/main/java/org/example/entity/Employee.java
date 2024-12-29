@@ -2,6 +2,8 @@ package org.example.entity;
 
 import javax.persistence.*;
 
+import org.example.utils.VladoRandoma;
+
 @Entity
 @Table(name = "Employee", schema = "mydb", uniqueConstraints = {
     @UniqueConstraint(columnNames = "EmpID")
@@ -31,12 +33,19 @@ public class Employee {
     private Company company;
 
     public Employee () {
-        this.empId=0;
         this.empFirstname="";
         this.empLastname="";
         this.empEgn="";
         this.empTel="";
         this.company=null;
+    }
+
+    public Employee (Company company) {
+        this.empFirstname=VladoRandoma.generateName();
+        this.empLastname=VladoRandoma.generateName();
+        this.empEgn=VladoRandoma.generateStringNumbber(10);
+        this.empTel=VladoRandoma.generateStringNumbber(12);
+        this.company=company;
     }
 
     public Employee (String empFirstname, String empLastname, String empEgn, String empTel, Company company){

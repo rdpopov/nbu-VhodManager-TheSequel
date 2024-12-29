@@ -10,7 +10,7 @@ import java.util.List;
 public class PaidDao {
 
     // Save a new Paid entry
-    public void save(Paid paid) {
+    public static void save(Paid paid) {
         Transaction transaction = null;
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -23,14 +23,14 @@ public class PaidDao {
     }
 
     // Find a Paid entry by ID
-    public Paid findById(int paidId) {
+    public static Paid findById(int paidId) {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             return session.get(Paid.class, paidId);  // Retrieve Paid object by ID
         }
     }
 
     // Find all Paid entries
-    public List<Paid> findAll() {
+    public static List<Paid> findAll() {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Query<Paid> query = session.createQuery("from Paid", Paid.class);
             return query.list();  // Return all Paid entries in the database
@@ -38,7 +38,7 @@ public class PaidDao {
     }
 
     // Update an existing Paid entry
-    public void update(Paid paid) {
+    public static void update(Paid paid) {
         Transaction transaction = null;
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -51,7 +51,7 @@ public class PaidDao {
     }
 
     // Delete a Paid entry by ID
-    public void delete(int paidId) {
+    public static void delete(int paidId) {
         Transaction transaction = null;
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();

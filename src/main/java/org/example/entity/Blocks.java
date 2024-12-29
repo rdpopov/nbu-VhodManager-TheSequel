@@ -2,6 +2,8 @@ package org.example.entity;
 
 import javax.persistence.*;
 
+import org.example.utils.VladoRandoma;
+
 @Entity
 @Table(name = "Blocks", schema = "mydb", uniqueConstraints = {
     @UniqueConstraint(columnNames = "BlockID")
@@ -22,8 +24,8 @@ public class Blocks {
     @Column(name = "BlockName",nullable = false , length = 45)
     private String blockName;
 
-    @Column(name = "BlockPart",nullable = false, length = 45)
-    private String blockPart;
+    @Column(name = "BlockPart",nullable = false)
+    private Double blockPart;
 
     @ManyToOne
     @JoinColumn(name = "TaxTaxId", nullable = false, referencedColumnName = "TaxId",
@@ -35,16 +37,24 @@ public class Blocks {
     private Employee employee;
 
     public Blocks() {
-        this.blockId= 0;
         this.blockAddress= "";
         this.blockFloors= 0;
         this.blockName= "";
-        this.blockPart= "";
+        this.blockPart= 0.0;
         this.tax = null;
         this.employee= null;
     }
 
-    public Blocks(String blockAddress, Integer blockFloors, String blockName, String blockPart, Tax tax, Employee employee) {
+    public Blocks(Tax tax, Employee employee) {
+        this.blockAddress = VladoRandoma.generateAdress();
+        this.blockFloors = VladoRandoma.randomInt(15);
+        this.blockName = VladoRandoma.generateName();
+        this.blockPart = VladoRandoma.randomSmallDouble();
+        this.tax = tax;
+        this.employee= employee;
+    }
+
+    public Blocks(String blockAddress, Integer blockFloors, String blockName, Double blockPart, Tax tax, Employee employee) {
         this.blockAddress= blockAddress;
         this.blockFloors= blockFloors;
         this.blockName= blockName;
@@ -86,11 +96,11 @@ public class Blocks {
         this.blockName = blockName;
     }
 
-    public String getBlockPart() {
+    public Double getBlockPart() {
         return blockPart;
     }
 
-    public void setBlockPart(String blockPart) {
+    public void setBlockPart(Double blockPart) {
         this.blockPart = blockPart;
     }
 

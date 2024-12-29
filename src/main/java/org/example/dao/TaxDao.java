@@ -10,7 +10,7 @@ import java.util.List;
 public class TaxDao {
 
     // Save a new Tax entry
-    public void save(Tax tax) {
+    public static void save(Tax tax) {
         Transaction transaction = null;
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -23,14 +23,14 @@ public class TaxDao {
     }
 
     // Find a Tax entry by ID
-    public Tax findById(int taxId) {
+    public static Tax findById(int taxId) {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             return session.get(Tax.class, taxId);  // Retrieve Tax object by ID
         }
     }
 
     // Find all Tax entries
-    public List<Tax> findAll() {
+    public static List<Tax> findAll() {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Query<Tax> query = session.createQuery("from Tax", Tax.class);
             return query.list();  // Return all Tax entries in the database
@@ -38,7 +38,7 @@ public class TaxDao {
     }
 
     // Update an existing Tax entry
-    public void update(Tax tax) {
+    public static void update(Tax tax) {
         Transaction transaction = null;
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -51,7 +51,7 @@ public class TaxDao {
     }
 
     // Delete a Tax entry by ID
-    public void delete(int taxId) {
+    public static void delete(int taxId) {
         Transaction transaction = null;
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();

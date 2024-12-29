@@ -2,6 +2,8 @@ package org.example.entity;
 
 import javax.persistence.*;
 
+import org.example.utils.*;;
+
 @Entity
 @Table(name = "Appartments", schema = "mydb")
 public class Appartments {
@@ -31,12 +33,21 @@ public class Appartments {
     private Blocks block;
 
     public Appartments() {
-        this.apptId = 0;
         this.apptFloor = 0;
         this.apptArea = 0.0;
-        this.apptNumber = "" ;
+        this.apptNumber = "";
         this.owner = null;
         this.block = null;
+    }
+
+    //random
+    public Appartments(Owners owner , Blocks block)
+    {
+        this.apptFloor = VladoRandoma.randomInt(15);
+        this.apptArea =  VladoRandoma.randomSmallDouble();
+        this.apptNumber = VladoRandoma.generateStringNumbber(2);
+        this.owner = owner;
+        this.block = block;
     }
 
     public Appartments(Integer apptFloor , Double apptArea , String apptNumber, Owners owner , Blocks block)

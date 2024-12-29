@@ -10,7 +10,7 @@ import java.util.List;
 public class AppartmentsDao {
 
     // Save a new Appartment
-    public void save(Appartments appartment) {
+    public static void save(Appartments appartment) {
         Transaction transaction = null;
         try (Session session =  SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -23,14 +23,14 @@ public class AppartmentsDao {
     }
 
     // Find an Appartment by its ID
-    public Appartments findById(int id) {
+    public static Appartments findById(int id) {
         try (Session session =  SessionFactoryUtil.getSessionFactory().openSession()) {
             return session.get(Appartments.class, id);  // Get Appartment object by ID
         }
     }
 
     // Find all Appartments
-    public List<Appartments> findAll() {
+    public static List<Appartments> findAll() {
         try (Session session =  SessionFactoryUtil.getSessionFactory().openSession()) {
             Query<Appartments> query = session.createQuery("from Appartments", Appartments.class);
             return query.list();  // Return all Appartments in the database
@@ -38,7 +38,7 @@ public class AppartmentsDao {
     }
 
     // Update an existing Appartment
-    public void update(Appartments appartment) {
+    public static void update(Appartments appartment) {
         Transaction transaction = null;
         try (Session session =  SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -51,7 +51,7 @@ public class AppartmentsDao {
     }
 
     // Delete an Appartment by its ID
-    public void delete(int id) {
+    public static void delete(int id) {
         Transaction transaction = null;
         try (Session session =  SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();

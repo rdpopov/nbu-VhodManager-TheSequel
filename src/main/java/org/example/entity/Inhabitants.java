@@ -2,6 +2,8 @@ package org.example.entity;
 
 import javax.persistence.*;
 
+import org.example.utils.VladoRandoma;
+
 import java.time.Instant;
 import java.util.Date;
 
@@ -30,15 +32,20 @@ public class Inhabitants {
     private Appartments appartment;
 
     public Inhabitants () {
-        this.inhId=0;
         this.inhFirstname="";
         this.inhLastname="";
-        this.inhDateOfBirth = Date.from(Instant.MIN);
+        this.inhDateOfBirth = new Date();
         this.appartment=null;
     }
 
+    public Inhabitants (Appartments appartment) {
+        this.inhFirstname=VladoRandoma.generateName();
+        this.inhLastname=VladoRandoma.generateName();
+        this.inhDateOfBirth = VladoRandoma.generateDate();
+        this.appartment=appartment;
+    }
+
     public Inhabitants (String inhFirstname, String inhLastname, Date inhDateOfBirth, Appartments appartment) {
-        this.inhId=0;
         this.inhFirstname=inhFirstname;
         this.inhLastname=inhLastname;
         this.inhDateOfBirth = inhDateOfBirth ;

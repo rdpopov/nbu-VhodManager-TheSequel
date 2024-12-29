@@ -2,6 +2,8 @@ package org.example.entity;
 
 import javax.persistence.*;
 
+import org.example.utils.VladoRandoma;
+
 @Entity
 @Table(name = "Owners", schema = "mydb")
 public class Owners {
@@ -27,12 +29,12 @@ public class Owners {
     public int getOwnerId() {
         return ownerId;
     }
-    public Owners(){
-        this.ownerId=0;
-        this.ownerFirstname="";
-        this.ownerLastname="";
-        this.ownerPhone="";
-        this.ownerEgn="";
+
+    public Owners() {
+        this.ownerFirstname=VladoRandoma.generateName();
+        this.ownerLastname=VladoRandoma.generateName();
+        this.ownerPhone=VladoRandoma.generateStringNumbber(12);
+        this.ownerEgn=VladoRandoma.generateStringNumbber(10);
     }
 
     public Owners(String ownerFirstname, String ownerLastname, String ownerPhone, String ownerEgn) {

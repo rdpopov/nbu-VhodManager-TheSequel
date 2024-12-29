@@ -11,7 +11,7 @@ import java.util.List;
 public class BlocksDao {
 
     // Save a new Block
-    public void save(Blocks block) {
+    public static void save(Blocks block) {
         Transaction transaction = null;
         try (Session session =  SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -24,14 +24,14 @@ public class BlocksDao {
     }
 
     // Find a Block by its ID
-    public Blocks findById(int id) {
+    public static Blocks findById(int id) {
         try (Session session =  SessionFactoryUtil.getSessionFactory().openSession()) {
             return session.get(Blocks.class, id);  // Retrieve Block object by ID
         }
     }
 
     // Find all Blocks
-    public List<Blocks> findAll() {
+    public static List<Blocks> findAll() {
         try (Session session =  SessionFactoryUtil.getSessionFactory().openSession()) {
             Query<Blocks> query = session.createQuery("from Blocks", Blocks.class);
             return query.list();  // Return all Blocks in the database
@@ -39,7 +39,7 @@ public class BlocksDao {
     }
 
     // Update an existing Block
-    public void update(Blocks block) {
+    public static void update(Blocks block) {
         Transaction transaction = null;
         try (Session session =  SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -52,7 +52,7 @@ public class BlocksDao {
     }
 
     // Delete a Block by its ID
-    public void delete(int id) {
+    public static void delete(int id) {
         Transaction transaction = null;
         try (Session session =  SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();

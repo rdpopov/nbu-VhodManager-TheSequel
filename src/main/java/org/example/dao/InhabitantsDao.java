@@ -11,7 +11,7 @@ import java.util.List;
 public class InhabitantsDao {
 
     // Save a new Inhabitant
-    public void save(Inhabitants inhabitants) {
+    public static void save(Inhabitants inhabitants) {
         Transaction transaction = null;
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -24,14 +24,14 @@ public class InhabitantsDao {
     }
 
     // Find an Inhabitant by ID
-    public Inhabitants findById(int inhId) {
+    public static Inhabitants findById(int inhId) {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             return session.get(Inhabitants.class, inhId);  // Retrieve Inhabitant object by ID
         }
     }
 
     // Find all Inhabitants
-    public List<Inhabitants> findAll() {
+    public static List<Inhabitants> findAll() {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Query<Inhabitants> query = session.createQuery("from Inhabitants", Inhabitants.class);
             return query.list();  // Return all Inhabitants in the database
@@ -39,7 +39,7 @@ public class InhabitantsDao {
     }
 
     // Update an existing Inhabitant
-    public void update(Inhabitants inhabitants) {
+    public static void update(Inhabitants inhabitants) {
         Transaction transaction = null;
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -52,7 +52,7 @@ public class InhabitantsDao {
     }
 
     // Delete an Inhabitant by ID
-    public void delete(int inhId) {
+    public static void delete(int inhId) {
         Transaction transaction = null;
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();

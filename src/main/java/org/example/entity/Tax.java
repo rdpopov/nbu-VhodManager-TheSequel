@@ -2,6 +2,8 @@ package org.example.entity;
 
 import javax.persistence.*;
 
+import org.example.utils.VladoRandoma;
+
 @Entity
 @Table(name = "Tax", schema = "mydb")
 public class Tax {
@@ -31,12 +33,12 @@ public class Tax {
 
     public Tax() {
         this.taxId=0;
-        this.taxPerAdult=0.0;
-        this.perChild=0.0;
-        this.taxArea=0.0;
-        this.taxPet=0.0;
-        this.taxFlat=0.0;
-        this.taxRepair=0.0;
+        this.taxPerAdult= VladoRandoma.randomSmallDouble();
+        this.perChild=VladoRandoma.randomSmallDouble();
+        this.taxArea=VladoRandoma.randomSmallDouble();
+        this.taxPet=VladoRandoma.randomSmallDouble();
+        this.taxFlat=VladoRandoma.randomSmallDouble();
+        this.taxRepair=VladoRandoma.randomSmallDouble();
     }
 
     public Tax(Double taxPerAdult, Double perChild, Double taxArea, Double taxPet, Double taxFlat, Double taxRepair){
