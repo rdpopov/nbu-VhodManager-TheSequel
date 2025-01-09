@@ -52,6 +52,14 @@ public class Inhabitants {
         this.appartment=appartment;
     }
 
+    public Inhabitants (int id, String inhFirstname, String inhLastname, Date inhDateOfBirth, Appartments appartment) {
+        this.inhId = id;
+        this.inhFirstname=inhFirstname;
+        this.inhLastname=inhLastname;
+        this.inhDateOfBirth = inhDateOfBirth ;
+        this.appartment=appartment;
+    }
+
     // Getters and Setters
     public int getInhId() {
         return inhId;

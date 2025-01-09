@@ -1,45 +1,98 @@
 package org.example.entity;
 
-import javax.persistence.*;
 
+import org.example.entity.Appartments;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-@Table(name = "Paid", schema = "mydb")
+@Table(name = "Paid")
 public class Paid {
 
     @Id
-    @Column(name = "PaidID", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int paidId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PaidID", nullable = false, unique = true)
+    private Integer paidID;
+
+    @Column(name = "PayAmount", nullable = false)
+    private Double payAmount;
+
+    @Column(name = "PaidOn")
+    private Date paidOn;
+
+    @Column(name = "PayTime", nullable = false)
+    private Date payTime;
 
     @ManyToOne
-    @JoinColumn(name = "TaxTaxId", nullable = false, referencedColumnName = "TaxId",
-                foreignKey = @ForeignKey(name = "fk_Paid_Tax1"))
+    @JoinColumn(
+        name = "TaxTaxId",
+        referencedColumnName = "TaxId",
+        nullable = false,
+        foreignKey = @ForeignKey(name = "fk_Paid_Tax1")
+    )
     private Tax tax;
 
     @ManyToOne
-    @JoinColumn(name = "AppartmentsApptID", nullable = false, referencedColumnName = "ApptID",
-                foreignKey = @ForeignKey(name = "fk_Paid_Appartments1"))
-    private Appartments appartment;
+    @JoinColumn(
+        name = "AppartmentsApptID",
+        referencedColumnName = "ApptID",
+        nullable = false,
+        foreignKey = @ForeignKey(name = "fk_Paid_Appartments1")
+    )
+    private Appartments appartments;
+
 
     public Paid() {
-        this.paidId=0;
+        this.paidID=0;
         this.tax=null;
-        this.appartment=null;
+        this.appartments=null;
+        this.payAmount = null;
+        this.paidOn = null;
+        this.payTime = null;
     }
 
-    public Paid(Tax tax, Appartments appartment) {
+    public Paid(Tax tax, Appartments appartment,Double payAmount,Date payTime) {
         this.tax=tax;
-        this.appartment=appartment;
+        this.appartments =appartment;
+        this.payAmount = payAmount;
+        this.payTime = payTime;
+    }
+
+    public void Pay() {
+        this.paidOn = new Date();
     }
 
     // Getters and Setters
-    public int getPaidId() {
-        return paidId;
+    public Integer getPaidID() {
+        return paidID;
     }
 
-    public void setPaidId(int paidId) {
-        this.paidId = paidId;
+    public void setPaidID(Integer paidID) {
+        this.paidID = paidID;
+    }
+
+    public Double getPayAmount() {
+        return payAmount;
+    }
+
+    public void setPayAmount(Double payAmount) {
+        this.payAmount = payAmount;
+    }
+
+    public Date getPaidOn() {
+        return paidOn;
+    }
+
+    public void setPaidOn(Date paidOn) {
+        this.paidOn = paidOn;
+    }
+
+    public Date getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(Date payTime) {
+        this.payTime = payTime;
     }
 
     public Tax getTax() {
@@ -50,21 +103,23 @@ public class Paid {
         this.tax = tax;
     }
 
-    public Appartments getAppartment() {
-        return appartment;
+    public Appartments getAppartments() {
+        return appartments;
     }
 
-    public void setAppartment(Appartments appartment) {
-        this.appartment = appartment;
+    public void setAppartments(Appartments appartments) {
+        this.appartments = appartments;
     }
 
-    // Optional: toString() method for debugging
     @Override
     public String toString() {
         return "Paid{" +
-                "paidId=" + paidId +
-                ", tax=" + tax +
-                ", appartment=" + appartment +
+                "paidID=" + paidID +
+                ", payAmount=" + payAmount +
+                ", paidOn=" + paidOn +
+                ", payTime=" + payTime +
+                ", tax=" + (tax != null ? tax.getTaxId() : "null") +
+                ", appartments=" + (appartments != null ? appartments.getApptId() : "null") +
                 '}';
     }
 }

@@ -13,7 +13,7 @@ public class Company {
     @Id
     @Column(name = "CompanyID", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int companyId;
+    public int companyId;
 
     @Column(name = "CompanyName", nullable = false, length = 45)
     private String companyName;

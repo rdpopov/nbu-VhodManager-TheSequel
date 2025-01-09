@@ -2,6 +2,7 @@ package org.example.dao;
 
 import org.hibernate.Session;
 import org.example.entity.Appartments;
+import org.example.entity.Blocks;
 import org.example.configuration.SessionFactoryUtil;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -53,6 +54,48 @@ public class AppartmentsDao {
         }
     }
 
+    public static void getTaxesForAppartment(Appartments appt) {
+        Transaction transaction = null;
+        try (Session session =  SessionFactoryUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();  // Rollback in case of error
+            e.printStackTrace();
+        }
+    }
+
+
+    public static List<Appartments> getAppartmentsInBlock(Blocks b) { //Integer lessThan, Integer moreThan,String like)
+        Transaction transaction = null;
+        try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
+
+            String hql = "SELECT a FROM Appartments a INNER JOIN a.block b WHERE b.blockId = :blid";
+
+            Query query = session.createQuery(hql);
+            query.setParameter("blid",b.getBlockId());
+            List<Appartments> _res = query.list();
+
+            return _res;
+        }
+    }
+
+
+    public static List<Long> getAppartmentsInBlockCount(Blocks b) { //Integer lessThan, Integer moreThan,String like)
+        Transaction transaction = null;
+        try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
+
+            String hql = "SELECT count(a) FROM Appartments a INNER JOIN a.block b WHERE b.blockId = :blid";
+
+            Query query = session.createQuery(hql);
+            query.setParameter("blid",b.getBlockId());
+            List<Long> _res = query.list();
+
+            return _res;
+        }
+    }
+
     // Delete an Appartment by its ID
     public static void delete(int id) {
         Transaction transaction = null;
@@ -78,6 +121,7 @@ public class AppartmentsDao {
             delete.from(Appartments.class);
             transaction = session.beginTransaction();
             session.createQuery(delete).executeUpdate();
+            session.createNativeQuery("ALTER TABLE mydb.Appartments AUTO_INCREMENT = 1").executeUpdate();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();

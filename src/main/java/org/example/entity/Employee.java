@@ -13,24 +13,24 @@ public class Employee {
     @Id
     @Column(name = "EmpID", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int empId;
+    public int empId;
 
     @Column(name = "EmpFirstname", length = 45)
-    private String empFirstname;
+    public String empFirstname;
 
     @Column(name = "EmpLastname", length = 45)
-    private String empLastname;
+    public  String empLastname;
 
     @Column(name = "EmpEGN", length = 15)
-    private String empEgn;
+    public String empEgn;
 
     @Column(name = "EmpTel", length = 15)
-    private String empTel;
+    public String empTel;
 
     @ManyToOne
     @JoinColumn(name = "CompanyCompanyID", nullable = false, referencedColumnName = "CompanyID",
     foreignKey = @ForeignKey(name = "fk_Employee_Company"))
-    private Company company;
+    public Company company;
 
     public Employee () {
         this.empFirstname="";

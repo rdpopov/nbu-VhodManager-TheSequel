@@ -1,70 +1,87 @@
 package org.example.dao;
 
 import org.hibernate.Session;
-import org.example.entity.Tax;
+import org.example.entity.Pets;
 import org.example.configuration.SessionFactoryUtil;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
+import java.util.List;
 
-public class TaxDao {
+public class PetsDao {
 
-    // Save a new Tax entry
-    public static void save(Tax tax) {
+    // Save a new Pet
+    public static void save(Pets pet) {
         Transaction transaction = null;
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.save(tax);  // Save the Tax object to the database
+            session.save(pet); // Save the pet object
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) transaction.rollback();  // Rollback in case of error
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
     }
 
-    // Find a Tax entry by ID
-    public static Tax findById(int taxId) {
+    // Get a Pet by id
+    public static Pets  findById(int idPets) {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
-            return session.get(Tax.class, taxId);  // Retrieve Tax object by ID
+            return session.get(Pets.class, idPets); // Retrieve the pet object by ID
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
-    // Find all Tax entries
-    public static List<Tax> findAll() {
+    // Get all Pets
+    public  static List<Pets>  findAll() {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
-            Query<Tax> query = session.createQuery("from Tax", Tax.class);
-            return query.list();  // Return all Tax entries in the database
+            Query<Pets> query = session.createQuery("FROM Pets", Pets.class);
+            return query.getResultList(); // Retrieve all Pets as a list
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
-    // Update an existing Tax entry
-    public static void update(Tax tax) {
+    // Update an existing Pet
+    public static void update(Pets pet) {
         Transaction transaction = null;
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.update(tax);  // Update the Tax object in the database
+            session.update(pet); // Update the pet object
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) transaction.rollback();  // Rollback in case of error
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
     }
 
-    // Delete a Tax entry by ID
-    public static void delete(int taxId) {
+    // Delete a Pet
+    public static void delete(int idPets) {
         Transaction transaction = null;
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            Tax tax = session.get(Tax.class, taxId);
-            if (tax != null) {
-                session.delete(tax);  // Delete the Tax object from the database
+            Pets pet = session.get(Pets.class, idPets); // Retrieve the pet object by ID
+            if (pet != null) {
+                session.delete(pet); // Delete the pet
             }
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) transaction.rollback();  // Rollback in case of error
+            if (transaction != null) {
+                transaction.rollback();
+            }
             e.printStackTrace();
         }
     }
@@ -74,11 +91,11 @@ public class TaxDao {
 
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             CriteriaBuilder cb = session.getCriteriaBuilder();
-            CriteriaDelete<Tax> delete = cb.createCriteriaDelete(Tax.class);
-            delete.from(Tax.class);
+            CriteriaDelete<Pets> delete = cb.createCriteriaDelete(Pets.class);
+            delete.from(Pets.class);
             transaction = session.beginTransaction();
             session.createQuery(delete).executeUpdate();
-            session.createNativeQuery("ALTER TABLE mydb.Tax AUTO_INCREMENT = 1").executeUpdate();
+            session.createNativeQuery("ALTER TABLE mydb.Inhabitants AUTO_INCREMENT = 1").executeUpdate();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();

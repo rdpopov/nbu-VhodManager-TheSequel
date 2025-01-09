@@ -79,6 +79,7 @@ public class OwnersDao {
             delete.from(Owners.class);
             transaction = session.beginTransaction();
             session.createQuery(delete).executeUpdate();
+            session.createNativeQuery("ALTER TABLE mydb.Owners AUTO_INCREMENT = 1").executeUpdate();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
