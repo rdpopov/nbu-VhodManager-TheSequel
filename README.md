@@ -5,117 +5,70 @@
 ![](img/erd.png)
 
 ### Company
-- CompanyID
-Номер на компанията - авто генериран и уникален
-- CompanyName 
-  име на компанията
-- CompanyAdress
-  адрес на компанията
+- CompanyID `Номер на компанията - авто генериран и уникален`
+- CompanyName `име на компанията`
+- CompanyAdress `адрес на компанията`
 
 ### Appartments
-- ApptID 
-  авто генериран и уникален
-- ApptFloor
-  Етаж
-- ApptArea
-  Площ на апартамента
-- ApptNumber
-  Номер на апартамента, но е текстов низ ,за да може да има апартаменти като 15А
-- OwnersOwnerID - OwnerID 
-  Връзка с таблицата за собственици
-- ApptBlockID - BlockID
-  Връзка с таблицата за Блокове. Един апартамент писъства само в един блок
+- ApptID `авто генериран и уникален`
+- ApptFloor `Етаж`
+- ApptArea `Площ на апартамента`
+- ApptNumber `Номер на апартамента, но е текстов низ ,за да може да има апартаменти като 15А`
+- OwnersOwnerID - OwnerID  `Връзка с таблицата за собственици`
+- ApptBlockID - BlockID` Връзка с таблицата за Блокове. Един апартамент писъства само в един блок`
 
 ### Blocks
-- BlockID
-авто генериран и уникален
-- BlockAdress
-Адрес на блока 
-- BlockFloors
-  Брой етажи
-- BlockName
-  Име на блока. Реално трябва да е нещо като 001 но в момента е има 
-- BlockPart
-  Застроена площ, като цяло не се ползва
-- TaxTaxId - TaxId
-  Връзка с таблицата Която определя таксите - Глобални за блок
-- EmployeeEmpID - EmpID
-  Работник който се грижи за блока
+- BlockID `авто генериран и уникален`
+- BlockAdress `Адрес на блока`
+- BlockFloors `Брой етажи`
+- BlockName `Име на блока. Реално трябва да е нещо като 001 но в момента е има`
+- BlockPart `Застроена площ, като цяло не се ползва`
+- TaxTaxId - TaxId `Връзка с таблицата Която определя таксите - Глобални за блок`
+- EmployeeEmpID - EmpID `Работник който се грижи за блока`
 
 ### Employee
-- EmpID
-  Номер на работника - авто генериран и уникален
-- EmpFirstname
-  Име на работника
-- EmpLastname
-  Фамилия
-- EmpEGN
-  Егн
-- EmpTel
-  Телефон
-- CompanyCompanyID - CompanyID
-  Връзка с Таблицата с фирмите
+- EmpID `Номер на работника - авто генериран и уникален`
+- EmpFirstname `Име на работника`
+- EmpLastname `Фамилия`
+- EmpEGN `Егн`
+- EmpTel `Телефон`
+- CompanyCompanyID - CompanyID `Връзка с Таблицата с фирмите`
 
 
 ### Inhabitatns -
-- InhID
-  Номер на живущия в апартамента
-- InhFirstname
-  Име
-- InhLastname
-  Фамиллия
-- InhDateOfBirth
-  Дата на раждане
-- AppartmentsApptID ApptID
-  Връзка с таблицата за апартаментите, в кой живее.
+- InhID `Номер на живущия в апартамента`
+- InhFirstname `Име`
+- InhLastname `Фамиллия`
+- InhDateOfBirth `Дата на раждане`
+- AppartmentsApptID ApptID `Връзка с таблицата за апартаментите, в кой живее.`
 
 ### Owners
-- OwnerID
-  Номер на собственика
-- OwnerFirstname
-  Име
-- OwnerLastname
-  Фамилия
-- OwnerPhone
-  Телефон
-- OwnerEGN
-  Егн
+- OwnerID `Номер на собственика`
+- OwnerFirstname `Име`
+- OwnerLastname `Фамилия`
+- OwnerPhone `Телефон`
+- OwnerEGN `Егн`
 
 ### Paid
 В тази таблица всеки месец се добавят нови фактури, за съответния месец.
- - PaidID
-   Номер на фактурата
- - PayAmount
-   Сума за плащане. Сумата е снапшот.
- - PaidOn
-   Дата на плащане. Ако не е платена е 'null'.
- - PayTime
-   Дата на издаване
- - TaxTaxId TaxId
-   Връзка с таблицата за коя такса е използвано за тази сметка
- - AppartmentsApptID ApptID
-   Номер на апартамент на който е сметката
+ - PaidID `Номер на фактурата`
+ - PayAmount `Сума за плащане. Сумата е снапшот.`
+ - PaidOn `Дата на плащане. Ако не е платена е 'null'.`
+ - PayTime `Дата на издаване`
+ - TaxTaxId TaxId `Връзка с таблицата за коя такса е използвано за тази сметка`
+ - AppartmentsApptID ApptID `Номер на апартамент на който е сметката`
 ### Pets
- - idPets
-   Номер на животното, авто генериран и уникален - 
- - Appartments_ApptID
-   В кой апартамент е 
+ - idPets `Номер на животното, авто генериран и уникален - `
+ - Appartments_ApptID `В кой апартамент е `
 
 ### Tax
-- TaxId
-  Номер на таксата
-- TaxPerAdult
-  Цена за възръстен
-- PerChild
-  Цена за дете
-- TaxArea
-  Цена на квадрат
-- TaxPet
-  Цена за животно
-- TaxFlat
-  Плоска цена за такса
-- TaxRepair
-  Такса за поддръжка на входа
+- TaxId `Номер на таксата`
+- TaxPerAdult `Цена за възръстен`
+- PerChild `Цена за дете`
+- TaxArea `Цена на квадрат`
+- TaxPet `Цена за животно`
+- TaxFlat `Плоска цена за такса`
+- TaxRepair `Такса за поддръжка на входа`
 
 ## Data Generation
 Данните са генерирани с класа [VladoRandoma.java](src/main/java/org/example/utils/VladoRandoma.java)
